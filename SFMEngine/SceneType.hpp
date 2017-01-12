@@ -1,0 +1,15 @@
+#ifndef ENUMERATION_SCENETYPE_HPP
+#define ENUMERATION_SCENETYPE_HPP
+
+
+enum SceneType
+{
+	INTRO,
+	MENU,
+	SETTINGS,
+	SCORES,
+	GAME,
+	LOADING
+};
+
+#endif
