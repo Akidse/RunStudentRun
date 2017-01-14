@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "../utilities/Constants.hpp"
 #include "../managers/SceneManager.hpp"
+#include "../managers/TimeManager.hpp"
 
 using namespace sf;
 

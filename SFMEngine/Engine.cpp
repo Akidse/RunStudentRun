@@ -10,6 +10,7 @@ Engine::Engine()
 	this->window.setFramerateLimit(Constants::FRAMERATE);
 	this->window.setVerticalSyncEnabled(true);
 	SceneManager::getInstance()->init(&window);
+	TimeManager::getInstance()->init();
 }
 
 void Engine::start()
@@ -18,20 +19,15 @@ void Engine::start()
 }
 void Engine::loop()
 {
-	this->previousTime = this->clock.getElapsedTime().asMilliseconds();
-	this->lagTime = 0;
 	while (true)
 	{
-		this->currentTime = this->clock.getElapsedTime().asMilliseconds();
-		this->elapsedTime = this->currentTime - this->previousTime;
-		this->previousTime = this->currentTime;
-		this->lagTime += this->elapsedTime;
+		TimeManager::getInstance()->updateLoopData();
 
-		while (this->lagTime >= 1000 / Constants::FRAMERATE)
+		while (TimeManager::getInstance()->getTime(TimeType::LAG_TIME) >= 1000 / Constants::FRAMERATE)
 		{
 			this->handleInput();
 			SceneManager::getInstance()->getCurrentScene()->update();
-			this->lagTime -= 1000 / Constants::FRAMERATE;
+			TimeManager::getInstance()->setTime(TimeManager::getInstance()->getTime(TimeType::LAG_TIME) - 1000 / Constants::FRAMERATE, TimeType::LAG_TIME);
 		}
 
 		this->window.clear(sf::Color(255,255,255));
