@@ -5,11 +5,15 @@
 #include <SFML/Graphics.hpp>
 #include "../managers/SceneManager.hpp"
 #include "../managers/ResourcesManager.hpp"
+#include "../managers/TimeManager.hpp"
 #include <iostream>
+
+#define INTRO_SCENE_DURATION 10
+
 class IntroScene : public Scene
 {
 	ResourcesManager* resourcesManager;
-	sf::CircleShape circle;
+	sf::Time currentDuration;
 public:
 	IntroScene();
 	void draw(sf::RenderWindow *window);
@@ -17,7 +21,5 @@ public:
 	void handleInput();
 
 	sf::Sprite logoSprite;
-	sf::Image logoImage;
-	sf::Texture logoTexture;
 };
 #endif

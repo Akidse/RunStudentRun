@@ -12,8 +12,6 @@ class Engine
 {
 	ContextSettings settings;
 	void loop();
-	Clock clock;
-	int previousTime, lagTime, currentTime, elapsedTime;
 	RenderWindow window;
 public:
 	Engine();

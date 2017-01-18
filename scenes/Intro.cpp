@@ -1,15 +1,15 @@
 #include "Intro.hpp"
-
+#include <iostream>
 IntroScene::IntroScene()
 {
 	resourcesManager = ResourcesManager::getInstance();
-	this->circle = sf::CircleShape(150);
-	this->circle.setFillColor(sf::Color(304, 37, 74));
 
 	logoSprite.setTexture(*resourcesManager->logoTexture);
 	logoSprite.scale(sf::Vector2f(0.5f, 0.5f));
 	logoSprite.setPosition(SceneManager::getInstance()->getWindow()->getSize().x / 2 - logoSprite.getGlobalBounds().width / 2,
 		SceneManager::getInstance()->getWindow()->getSize().y / 2 - logoSprite.getGlobalBounds().height / 2);
+	
+	(&resourcesManager->logoShader)->setUniform("texture", sf::Shader::CurrentTexture);
 }
 
 void IntroScene::handleInput()
@@ -22,11 +22,14 @@ void IntroScene::handleInput()
 
 void IntroScene::update()
 {
+	currentDuration += sf::milliseconds(TimeManager::getInstance()->getTime(TimeType::ELAPSED_TIME));
 	this->handleInput();
-	this->circle.move(0.1f, 0.1f);
+	if(currentDuration.asSeconds() < 5)(&resourcesManager->logoShader)->setUniform("percentTime", currentDuration.asSeconds() / 3);
+	if (currentDuration.asSeconds() > 5)(&resourcesManager->logoShader)->setUniform("percentTime", (INTRO_SCENE_DURATION - currentDuration.asSeconds()) / 2);
+	if (currentDuration.asSeconds() > INTRO_SCENE_DURATION)SceneManager::getInstance()->setScene(SceneType::MENU);
 }
 
 void IntroScene::draw(sf::RenderWindow *window)
 {
-	window->draw(logoSprite);
+	window->draw(logoSprite, &resourcesManager->logoShader);
 }

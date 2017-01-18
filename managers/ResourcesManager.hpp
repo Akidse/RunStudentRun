@@ -23,5 +23,6 @@ public:
 
 	sf::Image* logoImage;
 	sf::Texture* logoTexture;
+	sf::Shader logoShader;
 };
 #endif

@@ -44,6 +44,8 @@ void ResourcesManager::loadIntroResources()
 	logoTexture->loadFromImage(*logoImage);
 
 	logoTexture->setSmooth(true);
+
+	logoShader.loadFromFile("resources/shaders/logoShader.frag", sf::Shader::Fragment);
 }
 
 void ResourcesManager::loadMenuResources()
