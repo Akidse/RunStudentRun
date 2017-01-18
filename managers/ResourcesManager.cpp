@@ -9,6 +9,11 @@ ResourcesManager* ResourcesManager::getInstance()
 	return p_instance;
 }
 
+void ResourcesManager::init()
+{
+	loadLoadingResources();
+}
+
 void ResourcesManager::loadResources(SceneType p_scene)
 {
 	switch (p_scene)
@@ -45,10 +50,16 @@ void ResourcesManager::loadIntroResources()
 
 	logoTexture->setSmooth(true);
 
-	logoShader.loadFromFile("resources/shaders/logoShader.frag", sf::Shader::Fragment);
+	logoShader = new sf::Shader();
+	logoShader->loadFromFile("resources/shaders/logoShader.frag", sf::Shader::Fragment);
 }
 
 void ResourcesManager::loadMenuResources()
+{
+
+}
+
+void ResourcesManager::loadLoadingResources()
 {
 
 }
@@ -57,6 +68,7 @@ void ResourcesManager::unloadIntroResources()
 {
 	delete logoTexture;
 	delete logoImage;
+	delete logoShader;
 }
 
 void ResourcesManager::unloadMenuResources()

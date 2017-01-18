@@ -12,10 +12,12 @@ private:
 	ResourcesManager& operator = (ResourcesManager&);
 public:
 	static ResourcesManager* getInstance();
+	void init();
 
 	void loadResources(SceneType p_scene);
 	void loadIntroResources();
 	void loadMenuResources();
+	void loadLoadingResources();
 	void unloadResources(SceneType p_scene);
 	void unloadIntroResources();
 	void unloadMenuResources();
@@ -23,6 +25,6 @@ public:
 
 	sf::Image* logoImage;
 	sf::Texture* logoTexture;
-	sf::Shader logoShader;
+	sf::Shader* logoShader;
 };
 #endif
