@@ -6,6 +6,8 @@ MenuScene::MenuScene()
 
 	menuBackgroundSprite.setTexture(*resourcesManager->menuBackgroundTexture);
 	menuBackgroundSprite.setPosition(0,0);
+	resourcesManager->menuMusic->setLoop(true);
+	resourcesManager->menuMusic->play();
 }
 
 void MenuScene::handleInput()

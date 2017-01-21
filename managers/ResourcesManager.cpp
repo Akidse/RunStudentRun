@@ -64,6 +64,9 @@ void ResourcesManager::loadMenuResources()
 	menuBackgroundTexture->loadFromImage(*menuBackground);
 
 	menuBackgroundTexture->setSmooth(true);
+
+	menuMusic = new sf::Music();
+	menuMusic->openFromFile("resources/music/menu_stressedout.ogg");
 }
 
 void ResourcesManager::loadLoadingResources()

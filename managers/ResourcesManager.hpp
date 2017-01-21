@@ -2,6 +2,7 @@
 #define RESOURCES_MANAGER_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "../SFMEngine/SceneType.hpp"
 class ResourcesManager
 {
@@ -29,5 +30,6 @@ public:
 
 	sf::Image* menuBackground;
 	sf::Texture* menuBackgroundTexture;
+	sf::Music* menuMusic;
 };
 #endif
