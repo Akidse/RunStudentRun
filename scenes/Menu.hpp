@@ -9,11 +9,13 @@
 class MenuScene : public Scene
 {
 	ResourcesManager* resourcesManager;
-	sf::CircleShape circle;
+
 public:
 	MenuScene();
 	void draw(sf::RenderWindow *window);
 	void update();
 	void handleInput();
+
+	sf::Sprite menuBackgroundSprite;
 };
 #endif

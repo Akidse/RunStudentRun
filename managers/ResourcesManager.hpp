@@ -26,5 +26,8 @@ public:
 	sf::Image* logoImage;
 	sf::Texture* logoTexture;
 	sf::Shader* logoShader;
+
+	sf::Image* menuBackground;
+	sf::Texture* menuBackgroundTexture;
 };
 #endif

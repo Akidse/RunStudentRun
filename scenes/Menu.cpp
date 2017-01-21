@@ -3,8 +3,9 @@
 MenuScene::MenuScene()
 {
 	resourcesManager = ResourcesManager::getInstance();
-	this->circle = sf::CircleShape(150);
-	this->circle.setFillColor(sf::Color(122, 122, 122));
+
+	menuBackgroundSprite.setTexture(*resourcesManager->menuBackgroundTexture);
+	menuBackgroundSprite.setPosition(0,0);
 }
 
 void MenuScene::handleInput()
@@ -18,10 +19,9 @@ void MenuScene::handleInput()
 void MenuScene::update()
 {
 	this->handleInput();
-	this->circle.move(0.1f, 0.1f);
 }
 
 void MenuScene::draw(sf::RenderWindow *window)
 {
-	window->draw(circle);
+	window->draw(menuBackgroundSprite);
 }

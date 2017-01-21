@@ -16,6 +16,7 @@ void ResourcesManager::init()
 
 void ResourcesManager::loadResources(SceneType p_scene)
 {
+	//SceneManager::getInstance()->setScene(SceneType::LOADING);
 	switch (p_scene)
 	{
 		case SceneType::INTRO:
@@ -56,7 +57,13 @@ void ResourcesManager::loadIntroResources()
 
 void ResourcesManager::loadMenuResources()
 {
+	menuBackground = new sf::Image();
+	menuBackground->loadFromFile("resources/gfx/mainmenu.png");
 
+	menuBackgroundTexture = new sf::Texture();
+	menuBackgroundTexture->loadFromImage(*menuBackground);
+
+	menuBackgroundTexture->setSmooth(true);
 }
 
 void ResourcesManager::loadLoadingResources()
