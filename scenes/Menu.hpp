@@ -5,11 +5,15 @@
 #include <SFML/Graphics.hpp>
 #include "../managers/SceneManager.hpp"
 #include "../managers/ResourcesManager.hpp"
+#include "../entities/Button.hpp"
 #include <iostream>
 class MenuScene : public Scene
 {
 	ResourcesManager* resourcesManager;
 
+	Button* startButton;
+	Button* settingsButton;
+	Button* aboutButton;
 public:
 	MenuScene();
 	void draw(sf::RenderWindow *window);

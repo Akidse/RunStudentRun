@@ -30,6 +30,8 @@ public:
 
 	sf::Image* menuBackground;
 	sf::Texture* menuBackgroundTexture;
+	sf::Texture* menuButtonTexture;
 	sf::Music* menuMusic;
+	sf::Font* menuFont;
 };
 #endif
