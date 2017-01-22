@@ -20,12 +20,6 @@ MenuScene::MenuScene()
 	settingsButton->setTextFont(*resourcesManager->menuFont);
 	settingsButton->setTextSize(30);
 	settingsButton->setPosition(sf::Vector2f(175, 250));
-
-	aboutButton = new Button("About", *resourcesManager->menuButtonTexture, sf::Vector2f(300, 75));
-	aboutButton->setTextColor(sf::Color::White);
-	aboutButton->setTextFont(*resourcesManager->menuFont);
-	aboutButton->setTextSize(30);
-	aboutButton->setPosition(sf::Vector2f(175, 350));
 }
 
 void MenuScene::handleInput()
@@ -46,5 +40,4 @@ void MenuScene::draw(sf::RenderWindow *window)
 	window->draw(menuBackgroundSprite);
 	window->draw(*startButton);
 	window->draw(*settingsButton);
-	window->draw(*aboutButton);
 }

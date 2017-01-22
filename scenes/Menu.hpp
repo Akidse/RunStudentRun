@@ -13,7 +13,6 @@ class MenuScene : public Scene
 
 	Button* startButton;
 	Button* settingsButton;
-	Button* aboutButton;
 public:
 	MenuScene();
 	void draw(sf::RenderWindow *window);
