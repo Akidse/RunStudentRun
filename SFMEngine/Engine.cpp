@@ -36,7 +36,6 @@ void Engine::loop()
 		this->window.display();
 	}
 }
-
 void Engine::handleInput()
 {
 	Event event;

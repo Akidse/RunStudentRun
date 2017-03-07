@@ -18,6 +18,8 @@ public:
 	void draw(sf::RenderWindow *window);
 	void update();
 	void handleInput();
+	void handleStartButtonEvents(int e);
+	void handleSettingsButtonEvents(int e);
 
 	sf::Sprite menuBackgroundSprite;
 };
