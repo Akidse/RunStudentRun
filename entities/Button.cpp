@@ -1,50 +1,59 @@
 #include "Button.hpp"
 #include "../managers/SceneManager.hpp"
 #include <iostream>
-Button::Button(std::string p_text, sf::Texture& p_texture, sf::Vector2f p_size) :texture(p_texture)
+Button::Button(sf::Texture& p_texture, sf::Vector2f p_size, sf::Vector2f p_position) :texture(p_texture)
 {
 	this->size = p_size;
-	this->stringText = p_text;
+	this->position = p_position;
 	sprite = new sf::Sprite();
-	text = new sf::Text();
-	this->normalEffect();
+	sprite->setTexture(texture);
+	sprite->setPosition(position);
+	resizeSprite();
+
 	currentState = States::INACTIVE;
+}
+void Button::setText(std::string p_text, sf::Font& p_font, int p_size, sf::Color p_color)
+{
+	this->textSize = p_size;
+	this->stringText = p_text;
+
+	this->text = new sf::Text();
+	text->setString(this->stringText);
+
+	text->setFont(p_font);
+	text->setCharacterSize(p_size);
+	text->setFillColor(p_color);
+
+	centerText();
 }
 
 void Button::setPosition(sf::Vector2f p_position)
 {
-	position = p_position;
+	this->position = p_position;
 	sprite->setPosition(position);
+}
+void Button::resizeSprite(float factor)
+{
+	sprite->setScale(size.x*factor / sprite->getLocalBounds().width, size.y*factor / sprite->getLocalBounds().height);
+	sprite->setPosition(sf::Vector2f(this->position.x + (size.x - size.x*factor)/2, this->position.y + (size.y - size.y*factor)/2));
+}
+void Button::centerText()
+{
 	sf::FloatRect textRect = text->getLocalBounds();
 	text->setOrigin(textRect.left + textRect.width / 2.f, textRect.top + textRect.height / 2.f);
 	text->setPosition(sprite->getPosition().x + sprite->getGlobalBounds().width / 2, sprite->getPosition().y + sprite->getGlobalBounds().height / 2);
 }
-
-void Button::setTextColor(sf::Color p_color)
-{
-	text->setFillColor(p_color);
-}
-void Button::setTextSize(int p_size)
-{
-	text->setCharacterSize(p_size);
-}
-void Button::setTextFont(sf::Font& p_font)
-{
-	text->setFont(p_font);
-}
 void Button::pressedEffect()
 {
-	sprite->setScale(size.x*0.8 / sprite->getLocalBounds().width, size.y*0.8 / sprite->getLocalBounds().height);
-	text->setCharacterSize((int)COMMON_TEXT_SIZE*0.8);
+	resizeSprite(0.95);
+	text->setCharacterSize((int)textSize*0.95);
+	if (&stringText != nullptr)centerText();
 }
 void Button::normalEffect()
 {
-	sprite->setTexture(texture);
-	sprite->setPosition(0, 0);
-	sprite->setScale(size.x / sprite->getLocalBounds().width, size.y / sprite->getLocalBounds().height);
-	text->setString(stringText);
-	text->setFillColor(sf::Color::White);
-	text->setCharacterSize(COMMON_TEXT_SIZE);
+	resizeSprite();
+	text->setCharacterSize(textSize);
+	if (&stringText != nullptr)centerText();
 }
 void Button::update()
 {
@@ -53,39 +62,38 @@ void Button::update()
 	{
 		if (currentState == States::INACTIVE)
 		{
-			std::cout << "HOVER" << std::endl;
 			currentState = States::HOVERED;
 			dispatchEvent(Event::HOVER);
 		}
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && currentState != States::PRESSED)
 		{
-			std::cout << "PRESSED" << std::endl;
 			currentState = States::PRESSED;
+			pressedEffect();
 			dispatchEvent(Event::PRESSED);
 		}
 		else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && currentState == States::PRESSED)
 		{
-			std::cout << "UNPRESSED" << std::endl;
+			normalEffect();
 			currentState = States::HOVERED;
 			dispatchEvent(Event::UNPRESSED);
 		}
 	}
 	else if(currentState != States::INACTIVE)
 	{
-		std::cout << "INACTIVE" << std::endl;
 		currentState = States::INACTIVE;
 		dispatchEvent(Event::UNHOVER);
+		normalEffect();
 	}
 }
 bool Button::isCollised(sf::Vector2i mousePosition)
 {
 	if (mousePosition.x > position.x && mousePosition.x < position.x + size.x
-		&& mousePosition.y > position.y && mousePosition.y < position.x + size.y)
+		&& mousePosition.y > position.y && mousePosition.y < position.y + size.y)
 		return true;
 	return false;
 }
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(*sprite, states);
-	target.draw(*text, states);
+	if (&stringText != nullptr)target.draw(*text, states);
 }

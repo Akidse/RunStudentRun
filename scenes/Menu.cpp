@@ -7,7 +7,7 @@ void MenuScene::handleStartButtonEvents(int e)
 }
 void MenuScene::handleSettingsButtonEvents(int e)
 {
-
+	std::cout << "handled 2" << std::endl;
 }
 MenuScene::MenuScene()
 {
@@ -18,25 +18,19 @@ MenuScene::MenuScene()
 	resourcesManager->menuMusic->setLoop(true);
 	resourcesManager->menuMusic->play();
 	
-	startButton = new Button("Start", *resourcesManager->menuButtonTexture, sf::Vector2f(300, 75));
-	startButton->setTextColor(sf::Color::White);
-	startButton->setTextFont(*resourcesManager->menuFont);
-	startButton->setTextSize(30);
-	startButton->setPosition(sf::Vector2f(175, 150));
+	startButton = new Button(*resourcesManager->menuButtonTexture, sf::Vector2f(300, 75), sf::Vector2f(175, 150));
+	startButton->setText("Start", *resourcesManager->menuFont, 30, sf::Color::White);
 	startButton->registerEventHandler<MenuScene>((int)Button::Event::HOVER, this, &MenuScene::handleStartButtonEvents);
-	//startButton->registerEventHandler<MenuScene>(Button::Event::PRESSED, this, &MenuScene::handleStartButtonEvents);
-	//startButton->registerEventHandler<MenuScene>(Button::Event::UNPRESSED, this, &MenuScene::handleStartButtonEvents);
-	//startButton->registerEventHandler<MenuScene>(Button::Event::UNHOVER, this, &MenuScene::handleStartButtonEvents);
+	startButton->registerEventHandler<MenuScene>(Button::Event::PRESSED, this, &MenuScene::handleStartButtonEvents);
+	startButton->registerEventHandler<MenuScene>(Button::Event::UNPRESSED, this, &MenuScene::handleStartButtonEvents);
+	startButton->registerEventHandler<MenuScene>(Button::Event::UNHOVER, this, &MenuScene::handleStartButtonEvents);
 
-	settingsButton = new Button("Settings", *resourcesManager->menuButtonTexture, sf::Vector2f(300, 75));
-	settingsButton->setTextColor(sf::Color::White);
-	settingsButton->setTextFont(*resourcesManager->menuFont);
-	settingsButton->setTextSize(30);
-	settingsButton->setPosition(sf::Vector2f(175, 250));
-	//settingsButton->registerEventHandler<MenuScene>(Button::Event::HOVER, this, &MenuScene::handleSettingsButtonEvents);
-	//settingsButton->registerEventHandler<MenuScene>(Button::Event::PRESSED, this, &MenuScene::handleSettingsButtonEvents);
-	//settingsButton->registerEventHandler<MenuScene>(Button::Event::UNPRESSED, this, &MenuScene::handleSettingsButtonEvents);
-	//settingsButton->registerEventHandler<MenuScene>(Button::Event::UNHOVER, this, &MenuScene::handleSettingsButtonEvents);
+	settingsButton = new Button(*resourcesManager->menuButtonTexture, sf::Vector2f(300, 75), sf::Vector2f(175, 250));
+	settingsButton->setText("Settings", *resourcesManager->menuFont, 30, sf::Color::White);
+	settingsButton->registerEventHandler<MenuScene>(Button::Event::HOVER, this, &MenuScene::handleSettingsButtonEvents);
+	settingsButton->registerEventHandler<MenuScene>(Button::Event::PRESSED, this, &MenuScene::handleSettingsButtonEvents);
+	settingsButton->registerEventHandler<MenuScene>(Button::Event::UNPRESSED, this, &MenuScene::handleSettingsButtonEvents);
+	settingsButton->registerEventHandler<MenuScene>(Button::Event::UNHOVER, this, &MenuScene::handleSettingsButtonEvents);
 }
 
 void MenuScene::handleInput()

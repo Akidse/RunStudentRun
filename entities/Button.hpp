@@ -10,23 +10,21 @@ class Button: public sf::Drawable, public Eventable
 public:
 	static enum Event
 	{
-		PRESSED = 0,
-		UNPRESSED = 1,
-		HOVER = 2,
-		UNHOVER = 3
+		PRESSED,
+		UNPRESSED,
+		HOVER,
+		UNHOVER
 	};
 	enum class States
 	{
-		INACTIVE = 0,
-		PRESSED = 1,
-		HOVERED = 2
+		INACTIVE,
+		PRESSED,
+		HOVERED
 	};
 	States currentState;
-	Button(std::string p_text, sf::Texture& p_texture, sf::Vector2f p_size);
+	Button(sf::Texture& p_texture, sf::Vector2f p_size, sf::Vector2f p_position);
+	void setText(std::string p_text, sf::Font& p_font, int p_size, sf::Color p_color);
 	void setPosition(sf::Vector2f position);
-	void setTextColor(sf::Color p_color);
-	void setTextSize(int p_size);
-	void setTextFont(sf::Font& p_font);
 	void update();
 private:
 	sf::Sprite* sprite;
@@ -35,9 +33,12 @@ private:
 	sf::Text* text;
 	sf::String stringText;
 	sf::Vector2f position;
+	int textSize;
+	void resizeSprite(float factor = 1);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	void pressedEffect();
 	bool isCollised(sf::Vector2i mousePosition);
 	void normalEffect();
+	void centerText();
 };
 #endif
