@@ -24,9 +24,9 @@ void IntroScene::update()
 {
 	currentDuration += sf::milliseconds(TimeManager::getInstance()->getTime(TimeType::ELAPSED_TIME));
 	this->handleInput();
-	if(currentDuration.asSeconds() < 5)resourcesManager->logoShader->setUniform("percentTime", currentDuration.asSeconds() / 3);
-	if (currentDuration.asSeconds() > 5)resourcesManager->logoShader->setUniform("percentTime", (INTRO_SCENE_DURATION - currentDuration.asSeconds()) / 2);
-	if (currentDuration.asSeconds() > INTRO_SCENE_DURATION)SceneManager::getInstance()->setScene(SceneType::MENU);
+	resourcesManager->logoShader->setUniform("duration", INTRO_SCENE_DURATION);
+	resourcesManager->logoShader->setUniform("currentTime", currentDuration.asSeconds());
+	if (currentDuration.asSeconds() >= INTRO_SCENE_DURATION)SceneManager::getInstance()->setScene(SceneType::MENU);
 }
 
 void IntroScene::draw(sf::RenderWindow *window)

@@ -8,7 +8,7 @@
 #include "../managers/TimeManager.hpp"
 #include <iostream>
 
-#define INTRO_SCENE_DURATION 10
+#define INTRO_SCENE_DURATION 5.f
 
 class IntroScene : public Scene
 {
