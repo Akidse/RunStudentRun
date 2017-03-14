@@ -1,14 +1,13 @@
 #include "Menu.hpp"
-#include <iostream>
 
-void MenuScene::handleStartButtonEvents(int e)
+void MenuScene::handleStartButtonEvents(int event)
 {
-	std::cout << "handled" << std::endl;
 }
-void MenuScene::handleSettingsButtonEvents(int e)
+
+void MenuScene::handleSettingsButtonEvents(int event)
 {
-	std::cout << "handled 2" << std::endl;
 }
+
 MenuScene::MenuScene()
 {
 	resourcesManager = ResourcesManager::getInstance();

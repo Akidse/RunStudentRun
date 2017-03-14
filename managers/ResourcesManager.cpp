@@ -1,4 +1,5 @@
 #include "ResourcesManager.hpp"
+#include "../managers/SceneManager.hpp"
 
 ResourcesManager* ResourcesManager::p_instance = 0;
 
@@ -11,34 +12,49 @@ ResourcesManager* ResourcesManager::getInstance()
 
 void ResourcesManager::init()
 {
+	globalSoundVolume = 100;
+	globalMusicVolume = 100;
 	loadLoadingResources();
 }
 
-void ResourcesManager::loadResources(SceneType p_scene)
-{
-	//SceneManager::getInstance()->setScene(SceneType::LOADING);
-	switch (p_scene)
-	{
-		case SceneType::INTRO:
-			loadIntroResources();
-		break;
-		case SceneType::MENU:
-			loadMenuResources();
-		break;
-	}
-}
-
-void ResourcesManager::unloadResources(SceneType p_scene)
+void ResourcesManager::chooseSceneAction(SceneType p_scene, Action p_action)
 {
 	switch (p_scene)
 	{
 	case SceneType::INTRO:
-		unloadIntroResources();
+		if (p_action == Action::LOAD_RESOURCES)loadIntroResources();
+		if (p_action == Action::UNLOAD_RESOURCES)unloadIntroResources();
+		if (p_action == Action::SOUND_VOLUME)volumeIntroSound();
+		if (p_action == Action::MUSIC_VOLUME)volumeIntroMusic();
 		break;
 	case SceneType::MENU:
-		unloadMenuResources();
+		if (p_action == Action::LOAD_RESOURCES)loadMenuResources();
+		if (p_action == Action::UNLOAD_RESOURCES)unloadMenuResources();
+		if (p_action == Action::SOUND_VOLUME)volumeMenuSound();
+		if (p_action == Action::MUSIC_VOLUME)volumeMenuMusic();
 		break;
 	}
+}
+void ResourcesManager::loadResources(SceneType p_scene)
+{
+	chooseSceneAction(p_scene, Action::LOAD_RESOURCES);
+}
+
+void ResourcesManager::unloadResources(SceneType p_scene)
+{
+	chooseSceneAction(p_scene, Action::UNLOAD_RESOURCES);
+}
+
+void ResourcesManager::setGlobalSoundVolume(int p_volume)
+{
+	globalSoundVolume = p_volume;
+	chooseSceneAction(SceneManager::getInstance()->getCurrentSceneType(), Action::SOUND_VOLUME);
+}
+
+void ResourcesManager::setGlobalMusicVolume(int p_volume)
+{
+	globalMusicVolume = p_volume;
+	chooseSceneAction(SceneManager::getInstance()->getCurrentSceneType(), Action::MUSIC_VOLUME);
 }
 
 void ResourcesManager::loadIntroResources()
@@ -54,6 +70,12 @@ void ResourcesManager::loadIntroResources()
 	logoShader = new sf::Shader();
 	logoShader->loadFromFile("resources/shaders/logoShader.frag", sf::Shader::Fragment);
 }
+void ResourcesManager::unloadIntroResources()
+{
+	delete logoTexture;
+	delete logoImage;
+	delete logoShader;
+}
 
 void ResourcesManager::loadMenuResources()
 {
@@ -62,34 +84,36 @@ void ResourcesManager::loadMenuResources()
 
 	menuBackgroundTexture = new sf::Texture();
 	menuBackgroundTexture->loadFromImage(*menuBackground);
-
 	menuBackgroundTexture->setSmooth(true);
 
 	menuButtonTexture = new sf::Texture();
 	menuButtonTexture->loadFromFile("resources/gfx/menubutton.png");
-
 	menuButtonTexture->setSmooth(true);
 
 	menuMusic = new sf::Music();
 	menuMusic->openFromFile("resources/music/menu_stressedout.ogg");
+	menuMusic->setVolume(globalMusicVolume);
 
 	menuFont = new sf::Font();
 	menuFont->loadFromFile("resources/fonts/menu.ttf");
 }
-
-void ResourcesManager::loadLoadingResources()
-{
-
-}
-
-void ResourcesManager::unloadIntroResources()
-{
-	delete logoTexture;
-	delete logoImage;
-	delete logoShader;
-}
-
 void ResourcesManager::unloadMenuResources()
 {
+	delete menuBackground;
+	delete menuBackgroundTexture;
+	delete menuButtonTexture;
+	delete menuMusic;
+	delete menuFont;
+}
 
+void ResourcesManager::loadLoadingResources(){}
+
+
+void ResourcesManager::volumeIntroSound(){}
+void ResourcesManager::volumeIntroMusic(){}
+
+void ResourcesManager::volumeMenuSound(){}
+void ResourcesManager::volumeMenuMusic()
+{
+	menuMusic->setVolume(globalMusicVolume);
 }

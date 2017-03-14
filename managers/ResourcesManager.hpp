@@ -7,10 +7,21 @@
 class ResourcesManager
 {
 private:
+	enum class Action
+	{
+		LOAD_RESOURCES,
+		UNLOAD_RESOURCES,
+		SOUND_VOLUME,
+		MUSIC_VOLUME
+	};
+	bool isAudioMuted;
+	int globalSoundVolume;
+	int globalMusicVolume;
 	static ResourcesManager* p_instance;
 	ResourcesManager(){};
 	ResourcesManager(const ResourcesManager&);
 	ResourcesManager& operator = (ResourcesManager&);
+	void chooseSceneAction(SceneType p_sceneType, Action p_action);
 public:
 	static ResourcesManager* getInstance();
 	void init();
@@ -22,6 +33,14 @@ public:
 	void unloadResources(SceneType p_scene);
 	void unloadIntroResources();
 	void unloadMenuResources();
+
+	void volumeIntroSound();
+	void volumeIntroMusic();
+	void volumeMenuSound();
+	void volumeMenuMusic();
+	
+	void setGlobalSoundVolume(int p_volume);
+	void setGlobalMusicVolume(int p_volume);
 
 
 	sf::Image* logoImage;
