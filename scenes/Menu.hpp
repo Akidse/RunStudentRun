@@ -5,11 +5,13 @@
 #include <SFML/Graphics.hpp>
 #include "../managers/SceneManager.hpp"
 #include "../managers/ResourcesManager.hpp"
+#include "../managers/I18nManager.hpp"
 #include "../entities/Button.hpp"
 #include <iostream>
 class MenuScene : public Scene
 {
 	ResourcesManager* resourcesManager;
+	I18nManager* i18nManager;
 
 	Button* startButton;
 	Button* settingsButton;

@@ -9,6 +9,8 @@ Engine::Engine()
 
 	this->window.setFramerateLimit(Constants::FRAMERATE);
 	this->window.setVerticalSyncEnabled(true);
+	I18nManager::getInstance()->init();
+	I18nManager::getInstance()->loadLocale("ru");
 	ResourcesManager::getInstance()->init();
 	SceneManager::getInstance()->init(&window);
 	TimeManager::getInstance()->init();

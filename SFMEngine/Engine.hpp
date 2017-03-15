@@ -5,6 +5,7 @@
 #include "../utilities/Constants.hpp"
 #include "../managers/SceneManager.hpp"
 #include "../managers/TimeManager.hpp"
+#include "../managers/I18nManager.hpp"
 
 using namespace sf;
 
