@@ -32,5 +32,5 @@ std::string I18nManager::getText(std::string p_phrase)
 	{
 		if ((*it).first == p_phrase)return (*it).second;
 	}
-	return "phrase not found";
+	return p_phrase;
 }
