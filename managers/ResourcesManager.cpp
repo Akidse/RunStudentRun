@@ -84,11 +84,11 @@ void ResourcesManager::loadMenuResources()
 
 	menuBackgroundTexture = new sf::Texture();
 	menuBackgroundTexture->loadFromImage(*menuBackground);
-	menuBackgroundTexture->setSmooth(true);
+	menuBackgroundTexture->setSmooth(false);
 
 	menuButtonTexture = new sf::Texture();
-	menuButtonTexture->loadFromFile("resources/gfx/menubutton.png");
-	menuButtonTexture->setSmooth(true);
+	menuButtonTexture->loadFromFile("resources/gfx/menubutton_2.png");
+	menuButtonTexture->setSmooth(false);
 
 	menuMusic = new sf::Music();
 	menuMusic->openFromFile("resources/music/menu_stressedout.ogg");

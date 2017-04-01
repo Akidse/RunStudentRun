@@ -5,12 +5,15 @@ Button::Button(sf::Texture& p_texture, sf::Vector2f p_size, sf::Vector2f p_posit
 {
 	this->size = p_size;
 	this->position = p_position;
+	clickableArea = new sf::RectangleShape(size);
+	clickableArea->setPosition(position);
 	sprite = new sf::Sprite();
 	sprite->setTexture(texture);
 	sprite->setPosition(position);
 	resizeSprite();
 
 	currentState = States::INACTIVE;
+	freeToClick = true;
 }
 void Button::setText(std::string p_text, sf::Font& p_font, int p_size, sf::Color p_color)
 {
@@ -57,15 +60,22 @@ void Button::normalEffect()
 }
 void Button::update()
 {
-	sf::Vector2i mousePosition = sf::Mouse::getPosition(*SceneManager::getInstance()->getWindow());
-	if (isCollised(mousePosition))
+	mousePosition = sf::Mouse::getPosition(*SceneManager::getInstance()->getWindow());
+	mappedMousePosition = SceneManager::getInstance()->getWindow()->mapPixelToCoords(mousePosition);
+	transformedMousePosition = sprite->getInverseTransform().transformPoint(mappedMousePosition);
+	if (isCollised(transformedMousePosition))
 	{
 		if (currentState == States::INACTIVE)
 		{
 			currentState = States::HOVERED;
 			dispatchEvent(Event::HOVER);
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))freeToClick = false;
 		}
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && currentState != States::PRESSED)
+		else if (currentState == States::HOVERED)
+		{
+			if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))freeToClick = true;
+		}
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && currentState != States::PRESSED && freeToClick)
 		{
 			currentState = States::PRESSED;
 			pressedEffect();
@@ -78,17 +88,20 @@ void Button::update()
 			dispatchEvent(Event::UNPRESSED);
 		}
 	}
-	else if(currentState != States::INACTIVE)
+	else if (currentState != States::INACTIVE)
 	{
 		currentState = States::INACTIVE;
 		dispatchEvent(Event::UNHOVER);
 		normalEffect();
 	}
+	else
+	{
+		if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))freeToClick = true;
+	}
 }
-bool Button::isCollised(sf::Vector2i mousePosition)
+bool Button::isCollised(sf::Vector2f mousePosition)
 {
-	if (mousePosition.x > position.x && mousePosition.x < position.x + size.x
-		&& mousePosition.y > position.y && mousePosition.y < position.y + size.y)
+	if (sprite->getLocalBounds().contains(mousePosition))
 		return true;
 	return false;
 }
