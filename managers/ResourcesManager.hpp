@@ -50,6 +50,8 @@ public:
 	sf::Image* menuBackground;
 	sf::Texture* menuBackgroundTexture;
 	sf::Texture* menuButtonTexture;
+	sf::Texture* menuLeftArrowTexture;
+	sf::Texture* menuRightArrowTexture;
 	sf::Music* menuMusic;
 	sf::Font* menuFont;
 };

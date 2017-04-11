@@ -90,6 +90,14 @@ void ResourcesManager::loadMenuResources()
 	menuButtonTexture->loadFromFile("resources/gfx/menubutton_2.png");
 	menuButtonTexture->setSmooth(false);
 
+	menuLeftArrowTexture = new sf::Texture();
+	menuLeftArrowTexture->loadFromFile("resources/gfx/leftArrow.png");
+	menuLeftArrowTexture->setSmooth(false);
+
+	menuRightArrowTexture = new sf::Texture();
+	menuRightArrowTexture->loadFromFile("resources/gfx/rightArrow.png");
+	menuRightArrowTexture->setSmooth(false);
+
 	menuMusic = new sf::Music();
 	menuMusic->openFromFile("resources/music/menu_stressedout.ogg");
 	menuMusic->setVolume(globalMusicVolume);
@@ -101,6 +109,8 @@ void ResourcesManager::unloadMenuResources()
 {
 	delete menuBackground;
 	delete menuBackgroundTexture;
+	delete menuLeftArrowTexture;
+	delete menuRightArrowTexture;
 	delete menuButtonTexture;
 	delete menuMusic;
 	delete menuFont;

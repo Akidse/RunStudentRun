@@ -8,6 +8,7 @@
 #include "../managers/I18nManager.hpp"
 #include "../entities/GuiLayer.hpp"
 #include "../entities/Button.hpp"
+#include "../entities/GuiSwitcher.hpp"
 #include <iostream>
 class MenuScene : public Scene
 {
@@ -15,10 +16,13 @@ class MenuScene : public Scene
 	I18nManager* i18nManager;
 
 	GuiLayer menuLayer;
+	GuiLayer settingsLayer;
 	Button* startButton;
 	Button* settingsButton;
 	Button* aboutButton;
 	Button* exitButton;
+	GuiSwitcher soundSwitcher;
+	GuiSwitcher musicSwitcher;
 
 	void goToSubMenu();
 	sf::View* view;
@@ -32,6 +36,8 @@ public:
 	void handleSettingsButtonEvents(int e);
 	void handleAboutButtonEvents(int e);
 	void handleExitButtonEvents(int e);
+	void handleSoundSwitcherEvents(int e);
+	void handleMusicSwitcherEvents(int e);
 
 	sf::Sprite menuBackgroundSprite;
 };
