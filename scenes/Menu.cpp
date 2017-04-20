@@ -12,6 +12,7 @@ void MenuScene::handleSettingsButtonEvents(int event)
 	{
 		startButton->setInActive();
 		settingsButton->setActive();
+		settingsLayer.setActive(true);
 	}
 }
 
