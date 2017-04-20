@@ -17,16 +17,19 @@ public:
 	};
 	enum class States
 	{
+		ACTIVE,
 		INACTIVE,
 		PRESSED,
 		HOVERED
 	};
-	bool freeToClick;
+	bool haveText;
 	States currentState;
 	Button(sf::Texture& p_texture, sf::Vector2f p_size, sf::Vector2f p_position);
 	void setText(std::string p_text, sf::Font& p_font, int p_size, sf::Color p_color);
 	void setPosition(sf::Vector2f position);
 	void update();
+	void setActive();
+	void setInActive();
 private:
 	sf::Sprite* sprite;
 	sf::Texture& texture;

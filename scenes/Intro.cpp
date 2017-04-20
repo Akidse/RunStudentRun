@@ -33,3 +33,8 @@ void IntroScene::draw(sf::RenderWindow *window)
 {
 	window->draw(logoSprite, resourcesManager->logoShader);
 }
+
+IntroScene::~IntroScene()
+{
+	delete resourcesManager;
+}

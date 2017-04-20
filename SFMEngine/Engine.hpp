@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "../utilities/Constants.hpp"
+#include "../managers/ConfigManager.hpp"
 #include "../managers/SceneManager.hpp"
 #include "../managers/TimeManager.hpp"
 #include "../managers/I18nManager.hpp"

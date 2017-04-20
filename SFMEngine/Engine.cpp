@@ -9,9 +9,12 @@ Engine::Engine()
 
 	this->window.setFramerateLimit(Constants::FRAMERATE);
 	this->window.setVerticalSyncEnabled(true);
+	ConfigManager::getInstance()->init();
 	I18nManager::getInstance()->init();
-	I18nManager::getInstance()->loadLocale("uk");
+	I18nManager::getInstance()->loadLocale(ConfigManager::getInstance()->get("locale"));
 	ResourcesManager::getInstance()->init();
+	ResourcesManager::getInstance()->setGlobalMusicVolume(10*std::stoi(ConfigManager::getInstance()->get("music")));
+	ResourcesManager::getInstance()->setGlobalSoundVolume(10*std::stoi(ConfigManager::getInstance()->get("sound")));
 	SceneManager::getInstance()->init(&window);
 	SceneManager::getInstance()->setScene(SceneType::MENU);
 	TimeManager::getInstance()->init();

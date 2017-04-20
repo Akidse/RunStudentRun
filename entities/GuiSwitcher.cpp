@@ -61,6 +61,14 @@ void GuiSwitcher::setSwitchableLimits(float pLeftLimit, float pRightLimit, float
 	step = pStep;
 	currentLimit = rightLimit;
 }
+void GuiSwitcher::setCurrentValue(int value)
+{
+	if (!isValuableLimit)
+	{
+		currentLimit = value;
+		updateText();
+	}
+}
 void GuiSwitcher::decreaseValue()
 {
 	if (isValuableLimit)

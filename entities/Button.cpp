@@ -9,14 +9,17 @@ Button::Button(sf::Texture& p_texture, sf::Vector2f p_size, sf::Vector2f p_posit
 	clickableArea->setPosition(position);
 	sprite = new sf::Sprite();
 	sprite->setTexture(texture);
+	sprite->setTextureRect(sf::IntRect(0, 0, texture.getSize().x, texture.getSize().y/2));
 	sprite->setPosition(position);
 	resizeSprite();
 
 	currentState = States::INACTIVE;
-	freeToClick = true;
+	haveText = false;
 }
 void Button::setText(std::string p_text, sf::Font& p_font, int p_size, sf::Color p_color)
 {
+	haveText = true;
+
 	this->textSize = p_size;
 	this->stringText = p_text;
 
@@ -48,34 +51,35 @@ void Button::centerText()
 }
 void Button::pressedEffect()
 {
-	resizeSprite(0.95);
-	text->setCharacterSize((int)textSize*0.95);
-	if (&stringText != nullptr)centerText();
+	sprite->setTextureRect(sf::IntRect(0, texture.getSize().y / 2, texture.getSize().x, texture.getSize().y / 2));
 }
 void Button::normalEffect()
 {
-	resizeSprite();
-	text->setCharacterSize(textSize);
-	if (&stringText != nullptr)centerText();
+	sprite->setTextureRect(sf::IntRect(0, 0, texture.getSize().x, texture.getSize().y / 2));
+}
+void Button::setActive()
+{
+	currentState = States::ACTIVE;
+	pressedEffect();
+}
+void Button::setInActive()
+{
+	currentState = States::INACTIVE;
+	normalEffect();
 }
 void Button::update()
 {
 	mousePosition = sf::Mouse::getPosition(*SceneManager::getInstance()->getWindow());
 	mappedMousePosition = SceneManager::getInstance()->getWindow()->mapPixelToCoords(mousePosition);
 	transformedMousePosition = sprite->getInverseTransform().transformPoint(mappedMousePosition);
-	if (isCollised(transformedMousePosition))
+	if (isCollised(transformedMousePosition) && currentState != States::ACTIVE)
 	{
-		if (currentState == States::INACTIVE)
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && currentState == States::INACTIVE)
 		{
-			currentState = States::HOVERED;
-			dispatchEvent(Event::HOVER);
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))freeToClick = false;
+			currentState = States::INACTIVE;
+			normalEffect();
 		}
-		else if (currentState == States::HOVERED)
-		{
-			if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))freeToClick = true;
-		}
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && currentState != States::PRESSED && freeToClick)
+		else if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && currentState != States::PRESSED)
 		{
 			currentState = States::PRESSED;
 			pressedEffect();
@@ -83,20 +87,23 @@ void Button::update()
 		}
 		else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left) && currentState == States::PRESSED)
 		{
-			normalEffect();
-			currentState = States::HOVERED;
 			dispatchEvent(Event::UNPRESSED);
+			currentState = States::HOVERED;
+			normalEffect();
+			dispatchEvent(Event::HOVER);
+		}
+		else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			currentState = States::HOVERED;
+			normalEffect();
+			dispatchEvent(Event::HOVER);
 		}
 	}
-	else if (currentState != States::INACTIVE)
+	else if (currentState != States::INACTIVE && currentState != States::ACTIVE)
 	{
 		currentState = States::INACTIVE;
 		dispatchEvent(Event::UNHOVER);
 		normalEffect();
-	}
-	else
-	{
-		if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))freeToClick = true;
 	}
 }
 bool Button::isCollised(sf::Vector2f mousePosition)
@@ -108,5 +115,5 @@ bool Button::isCollised(sf::Vector2f mousePosition)
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(*sprite, states);
-	if (&stringText != nullptr)target.draw(*text, states);
+	if (haveText)target.draw(*text, states);
 }

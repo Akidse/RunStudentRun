@@ -45,6 +45,7 @@ public:
 	GuiSwitcher(sf::Texture& pleftArrow, sf::Texture& prightArrow, sf::Font& pFont, sf::Vector2f pPosition);
 	void setSwitchableValues(float* pValues, int valuesSize);
 	void setSwitchableLimits(float pLeftLimit, float pRightLimit, float pStep);
+	void setCurrentValue(int value);
 	void update();
 	void decreaseValue();
 	void increaseValue();

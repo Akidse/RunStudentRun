@@ -57,6 +57,16 @@ void ResourcesManager::setGlobalMusicVolume(int p_volume)
 	chooseSceneAction(SceneManager::getInstance()->getCurrentSceneType(), Action::MUSIC_VOLUME);
 }
 
+int ResourcesManager::getGlobalSoundVolume()
+{
+	return globalSoundVolume;
+}
+
+int ResourcesManager::getGlobalMusicVolume()
+{
+	return globalMusicVolume;
+}
+
 void ResourcesManager::loadIntroResources()
 {
 	logoImage = new sf::Image();
@@ -97,6 +107,18 @@ void ResourcesManager::loadMenuResources()
 	menuRightArrowTexture = new sf::Texture();
 	menuRightArrowTexture->loadFromFile("resources/gfx/rightArrow.png");
 	menuRightArrowTexture->setSmooth(false);
+
+	menuLangButtonEnTexture = new sf::Texture();
+	menuLangButtonEnTexture->loadFromFile("resources/gfx/langbutton_en.png");
+	menuLangButtonEnTexture->setSmooth(false);
+
+	menuLangButtonUkTexture = new sf::Texture();
+	menuLangButtonUkTexture->loadFromFile("resources/gfx/langbutton_uk.png");
+	menuLangButtonUkTexture->setSmooth(false);
+
+	menuLangButtonRuTexture = new sf::Texture();
+	menuLangButtonRuTexture->loadFromFile("resources/gfx/langbutton_ru.png");
+	menuLangButtonRuTexture->setSmooth(false);
 
 	menuMusic = new sf::Music();
 	menuMusic->openFromFile("resources/music/menu_stressedout.ogg");

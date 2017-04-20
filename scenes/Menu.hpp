@@ -4,6 +4,7 @@
 #include "../SFMEngine/Scene.hpp"
 #include <SFML/Graphics.hpp>
 #include "../managers/SceneManager.hpp"
+#include "../managers/ConfigManager.hpp"
 #include "../managers/ResourcesManager.hpp"
 #include "../managers/I18nManager.hpp"
 #include "../entities/GuiLayer.hpp"
@@ -14,18 +15,29 @@ class MenuScene : public Scene
 {
 	ResourcesManager* resourcesManager;
 	I18nManager* i18nManager;
+	ConfigManager* configManager;
 
 	GuiLayer menuLayer;
 	GuiLayer settingsLayer;
+	GuiLayer langSwitcherLayer;
 	Button* startButton;
 	Button* settingsButton;
 	Button* aboutButton;
 	Button* exitButton;
+	Button* langButtonEn;
+	Button* langButtonUk;
+	Button* langButtonRu;
 	GuiSwitcher soundSwitcher;
 	GuiSwitcher musicSwitcher;
 
+	sf::Text langSwitcherLabel;
+	sf::Text soundSwitcherLabel;
+	sf::Text musicSwitcherLabel;
+
 	void goToSubMenu();
 	sf::View* view;
+
+	bool isReadyForRefresh;
 public:
 
 	MenuScene();
@@ -39,6 +51,11 @@ public:
 	void handleSoundSwitcherEvents(int e);
 	void handleMusicSwitcherEvents(int e);
 
+	void handleLangButtonEnEvents(int e);
+	void handleLangButtonUkEvents(int e);
+	void handleLangButtonRuEvents(int e);
+
 	sf::Sprite menuBackgroundSprite;
+	~MenuScene();
 };
 #endif

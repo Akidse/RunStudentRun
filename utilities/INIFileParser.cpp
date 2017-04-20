@@ -13,8 +13,11 @@ std::map<std::string, std::string> INIFileParser::parse()
 	while (!fileStream->eof())
 	{
 		std::getline(*fileStream, tempString);
-		tempParsedString = parseString(tempString);
-		parsedText.insert(std::pair<std::string, std::string>(tempParsedString[0], tempParsedString[1]));
+		if (tempString.length() != 0)
+		{
+			tempParsedString = parseString(tempString);
+			parsedText.insert(std::pair<std::string, std::string>(tempParsedString[0], tempParsedString[1]));
+		}
 	}
 	fileStream->close();
 

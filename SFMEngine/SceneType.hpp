@@ -4,6 +4,7 @@
 
 enum SceneType
 {
+	NONE,
 	INTRO,
 	MENU,
 	SETTINGS,

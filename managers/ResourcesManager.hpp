@@ -41,6 +41,8 @@ public:
 	
 	void setGlobalSoundVolume(int p_volume);
 	void setGlobalMusicVolume(int p_volume);
+	int getGlobalSoundVolume();
+	int getGlobalMusicVolume();
 
 
 	sf::Image* logoImage;
@@ -52,6 +54,9 @@ public:
 	sf::Texture* menuButtonTexture;
 	sf::Texture* menuLeftArrowTexture;
 	sf::Texture* menuRightArrowTexture;
+	sf::Texture* menuLangButtonEnTexture;
+	sf::Texture* menuLangButtonUkTexture;
+	sf::Texture* menuLangButtonRuTexture;
 	sf::Music* menuMusic;
 	sf::Font* menuFont;
 };

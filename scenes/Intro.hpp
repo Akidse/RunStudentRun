@@ -21,5 +21,6 @@ public:
 	void handleInput();
 
 	sf::Sprite logoSprite;
+	~IntroScene();
 };
 #endif
