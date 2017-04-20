@@ -6,6 +6,7 @@
 class GuiLayer : public sf::Drawable
 {
 private:
+	bool isActiveLayer;
 	sf::Vector2f position;
 	sf::Transform transform;
 	std::vector<sf::Drawable*> drawableElements;
@@ -44,6 +45,9 @@ public:
 		drawableElements.push_back(dynamic_cast<sf::Drawable*>(&p_element));
 		transformableElements.push_back(dynamic_cast<sf::Transformable*>(&p_element));
 	}
+
+	void setActive(bool p_active);
+	bool isActive();
 };
 
 

@@ -180,6 +180,8 @@ MenuScene::MenuScene()
 	settingsLayer.addEntity(musicSwitcher);
 	settingsLayer.addEntity(soundSwitcherLabel);
 	settingsLayer.addEntity(soundSwitcher);
+
+	settingsLayer.setActive(false);
 }
 
 void MenuScene::handleInput()
@@ -201,11 +203,14 @@ void MenuScene::update()
 	settingsButton->update();
 	aboutButton->update();
 	exitButton->update();
-	soundSwitcher.update();
-	musicSwitcher.update();
-	langButtonEn->update();
-	langButtonRu->update();
-	langButtonUk->update();
+	if (settingsLayer.isActive())
+	{
+		soundSwitcher.update();
+		musicSwitcher.update();
+		langButtonEn->update();
+		langButtonRu->update();
+		langButtonUk->update();
+	}
 	if (isReadyForRefresh)SceneManager::getInstance()->setScene(SceneType::INTRO);
 }
 

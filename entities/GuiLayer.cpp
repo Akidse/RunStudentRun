@@ -2,20 +2,25 @@
 #include <iostream>
 void GuiLayer::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	for (int i = 0; i < drawableElements.size(); i++)
+	if (isActiveLayer)
 	{
-		target.draw(*drawableElements[i], states);
+		for (int i = 0; i < drawableElements.size(); i++)
+		{
+			target.draw(*drawableElements[i], states);
+		}
 	}
 }
 GuiLayer::GuiLayer()
 {
 	position.x = 0;
 	position.y = 0;
+	isActiveLayer = true;
 }
 GuiLayer::GuiLayer(float x, float y)
 {
 	position.x = x;
 	position.y = y;
+	isActiveLayer = true;
 }
 sf::Vector2f GuiLayer::getPosition()
 {
@@ -117,4 +122,14 @@ void GuiLayer::scale(const sf::Vector2f &factors)
 	{
 		transformableElements[i]->scale(factors);
 	}
+}
+
+void GuiLayer::setActive(bool p_active)
+{
+	isActiveLayer = p_active;
+}
+
+bool GuiLayer::isActive()
+{
+	return isActiveLayer;
 }
