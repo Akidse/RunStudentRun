@@ -1,5 +1,4 @@
 #include "Menu.hpp"
-#include <iostream>
 void MenuScene::handleStartButtonEvents(int event)
 {
 	if (event == Button::Event::PRESSED)startButton->setActive();
@@ -103,7 +102,7 @@ MenuScene::MenuScene()
 	resourcesManager->menuMusic->play();
 	
 	startButton = new Button(*resourcesManager->menuButtonTexture, sf::Vector2f(400, 80), sf::Vector2f(130, 260));
-	startButton->setText(i18nManager->getText("Menu") , *resourcesManager->menuFont, 30, sf::Color::White);
+	startButton->setText(i18nManager->getText("Play") , *resourcesManager->menuFont, 30, sf::Color::White);
 	startButton->registerEventHandler<MenuScene>((int)Button::Event::HOVER, this, &MenuScene::handleStartButtonEvents);
 	startButton->registerEventHandler<MenuScene>(Button::Event::PRESSED, this, &MenuScene::handleStartButtonEvents);
 	startButton->registerEventHandler<MenuScene>(Button::Event::UNPRESSED, this, &MenuScene::handleStartButtonEvents);
@@ -143,7 +142,6 @@ MenuScene::MenuScene()
 
 	musicSwitcher.setSwitchableLimits(0, 10, 1);
 	musicSwitcher.setCurrentValue(resourcesManager->getGlobalMusicVolume()/10);
-	std::cout << musicSwitcher.getCurrentValue() << std::endl;
 	musicSwitcher.registerEventHandler<MenuScene>(GuiSwitcher::Event::DECREASE_VALUE, this, &MenuScene::handleMusicSwitcherEvents);
 	musicSwitcher.registerEventHandler<MenuScene>(GuiSwitcher::Event::INCREASE_VALUE, this, &MenuScene::handleMusicSwitcherEvents);
 
