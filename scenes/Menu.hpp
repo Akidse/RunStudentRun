@@ -27,17 +27,20 @@ class MenuScene : public Scene
 	Button* langButtonEn;
 	Button* langButtonUk;
 	Button* langButtonRu;
-	GuiSwitcher soundSwitcher;
-	GuiSwitcher musicSwitcher;
+	Button* scoresButton;
+	GuiSwitcher* soundSwitcher;
+	GuiSwitcher* musicSwitcher;
 
 	sf::Text langSwitcherLabel;
 	sf::Text soundSwitcherLabel;
 	sf::Text musicSwitcherLabel;
 
-	void goToSubMenu();
 	sf::View* view;
 
-	bool isReadyForRefresh;
+	bool isReadyForRefresh = false;
+	void generateMenuLayer();
+	void generateSettingsLayer();
+	void generateLevelsLayer();
 public:
 
 	MenuScene();
@@ -50,6 +53,7 @@ public:
 	void handleExitButtonEvents(int e);
 	void handleSoundSwitcherEvents(int e);
 	void handleMusicSwitcherEvents(int e);
+	void handleScoresButtonEvents(int e);
 
 	void handleLangButtonEnEvents(int e);
 	void handleLangButtonUkEvents(int e);
