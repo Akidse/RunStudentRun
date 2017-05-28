@@ -185,6 +185,8 @@ void MenuScene::generateSettingsLayer()
 	settingsLayer.addEntity(*soundSwitcher);
 
 	settingsLayer.setActive(false);
+
+	testLevelButton = new LevelButton(sf::Vector2f(670.f, 150.f), *ResourcesManager::getInstance()->menuFont);
 }
 
 void MenuScene::handleInput()
@@ -219,6 +221,7 @@ void MenuScene::draw(sf::RenderWindow *window)
 	window->draw(menuBackgroundSprite);
 	window->draw(menuLayer);
 	window->draw(settingsLayer);
+	window->draw(*testLevelButton);
 }
 
 MenuScene::~MenuScene()

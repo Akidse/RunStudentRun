@@ -10,6 +10,7 @@
 #include "../entities/GuiLayer.hpp"
 #include "../entities/Button.hpp"
 #include "../entities/GuiSwitcher.hpp"
+#include "../entities/LevelButton.hpp"
 #include <iostream>
 class MenuScene : public Scene
 {
@@ -30,6 +31,8 @@ class MenuScene : public Scene
 	Button* scoresButton;
 	GuiSwitcher* soundSwitcher;
 	GuiSwitcher* musicSwitcher;
+	
+	LevelButton* testLevelButton;
 
 	sf::Text langSwitcherLabel;
 	sf::Text soundSwitcherLabel;
