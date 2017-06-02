@@ -21,6 +21,7 @@ class MenuScene : public Scene
 	GuiLayer menuLayer;
 	GuiLayer settingsLayer;
 	GuiLayer langSwitcherLayer;
+	GuiLayer levelButtonsLayer;
 	Button* startButton;
 	Button* settingsButton;
 	Button* aboutButton;
@@ -32,7 +33,7 @@ class MenuScene : public Scene
 	GuiSwitcher* soundSwitcher;
 	GuiSwitcher* musicSwitcher;
 	
-	LevelButton* testLevelButton;
+	LevelButton* levelButtons[7];
 
 	sf::Text langSwitcherLabel;
 	sf::Text soundSwitcherLabel;
@@ -50,17 +51,19 @@ public:
 	void draw(sf::RenderWindow *window);
 	void update();
 	void handleInput();
-	void handleStartButtonEvents(int e);
-	void handleSettingsButtonEvents(int e);
-	void handleAboutButtonEvents(int e);
-	void handleExitButtonEvents(int e);
-	void handleSoundSwitcherEvents(int e);
-	void handleMusicSwitcherEvents(int e);
-	void handleScoresButtonEvents(int e);
+	void handleStartButtonEvents(std::string objectID, int e);
+	void handleSettingsButtonEvents(std::string objectID, int e);
+	void handleAboutButtonEvents(std::string objectID, int e);
+	void handleExitButtonEvents(std::string objectID, int e);
+	void handleSoundSwitcherEvents(std::string objectID, int e);
+	void handleMusicSwitcherEvents(std::string objectID, int e);
+	void handleScoresButtonEvents(std::string objectID, int e);
 
-	void handleLangButtonEnEvents(int e);
-	void handleLangButtonUkEvents(int e);
-	void handleLangButtonRuEvents(int e);
+	void handleLangButtonEnEvents(std::string objectID, int e);
+	void handleLangButtonUkEvents(std::string objectID, int e);
+	void handleLangButtonRuEvents(std::string objectID, int e);
+
+	void handleLevelButton(std::string objectID, int e);
 
 	sf::Sprite menuBackgroundSprite;
 	~MenuScene();

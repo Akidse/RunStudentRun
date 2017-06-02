@@ -5,7 +5,7 @@
 #include "../SFMEngine/Eventable.hpp"
 class IButton : public sf::Drawable, public Eventable, public sf::Transformable
 {
-protected:
+public:
 	static enum Event
 	{
 		PRESSED,
@@ -25,10 +25,6 @@ protected:
 		HOVERED,
 		PRESSED
 	};
-private:
-	State currentState = State::NORMAL;
-	ActionState currentActionState = ActionState::INACTIVE;
-public:
 	void update();
 	void setState(State pState);
 	void setActionState(ActionState pActionState);
@@ -36,7 +32,11 @@ public:
 	virtual void handleEffect(ActionState pState){};
 	virtual void handleEffect(State pState){};
 	virtual void handleEffect(Event pEvent){};
-	void handleButtonEvent(Event pEvent);
+	void handleButtonEvent(Event pEvent); 
+
+private:
+	State currentState = State::NORMAL;
+	ActionState currentActionState = ActionState::INACTIVE;
 };
 
 #endif

@@ -21,5 +21,9 @@ public:
 	void handleEffect(State pState);
 	void handleEffect(Event pEvent);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+	sf::Vector2i mousePosition;
+	sf::Vector2f mappedMousePosition;
+	sf::Vector2f transformedMousePosition;
 };
 #endif

@@ -1,5 +1,6 @@
 #include "LevelButton.hpp"
 #include <string>
+#include "../managers/SceneManager.hpp"
 
 LevelButton::LevelButton(sf::Vector2f pPosition, sf::Font& pFont)
 	:mFont(pFont)
@@ -47,17 +48,19 @@ void LevelButton::updateText()
 	mCollectionText.setOrigin(mCollectionText.getLocalBounds().left + mCollectionText.getLocalBounds().width / 2.f, mCollectionText.getLocalBounds().top + mCollectionText.getLocalBounds().height / 2.f);
 	mCollectionText.setPosition(mRectangleShape.getPosition().x + mRectangleShape.getGlobalBounds().width / 2.f,
 		mRectangleShape.getPosition().y + mRectangleShape.getGlobalBounds().height + 20);
+
 }
 
 void LevelButton::normalEffect()
 {
-	if (mLevelCollectedNumber / mLevelFullCollectionNumber < 1 / 2)
+	
+	if (mLevelCollectedNumber  < mLevelFullCollectionNumber / 2)
 	{
 		mRectangleShape.setFillColor(sf::Color(228, 176, 184));
 		mLevelText.setFillColor(sf::Color::White);
 		mCollectionText.setFillColor(sf::Color(228, 176, 184));
 	}
-	else if (mLevelCollectedNumber / mLevelFullCollectionNumber < 1)
+	else if (mLevelCollectedNumber < mLevelFullCollectionNumber)
 	{
 		mRectangleShape.setFillColor(sf::Color(233, 228, 180));
 		mLevelText.setFillColor(sf::Color::White);
@@ -73,13 +76,13 @@ void LevelButton::normalEffect()
 
 void LevelButton::pressedEffect()
 {
-	if (mLevelCollectedNumber / mLevelFullCollectionNumber < 1 / 2)
+	if (mLevelCollectedNumber  < mLevelFullCollectionNumber / 2)
 	{
 		mRectangleShape.setFillColor(sf::Color(210, 119, 133));
 		mLevelText.setFillColor(sf::Color::White);
 		mCollectionText.setFillColor(sf::Color(228, 176, 184));
 	}
-	else if (mLevelCollectedNumber / mLevelFullCollectionNumber < 1)
+	else if (mLevelCollectedNumber < mLevelFullCollectionNumber)
 	{
 		mRectangleShape.setFillColor(sf::Color(215, 207, 120));
 		mLevelText.setFillColor(sf::Color::White);
@@ -129,6 +132,11 @@ void LevelButton::handleEffect(State pState)
 
 bool LevelButton::isCollidedWithCursor()
 {
+	mousePosition = sf::Mouse::getPosition(*SceneManager::getInstance()->getWindow());
+	mappedMousePosition = SceneManager::getInstance()->getWindow()->mapPixelToCoords(mousePosition);
+	transformedMousePosition = mRectangleShape.getInverseTransform().transformPoint(mappedMousePosition);
+	if (mRectangleShape.getLocalBounds().contains(transformedMousePosition))
+		return true;
 	return false;
 }
 

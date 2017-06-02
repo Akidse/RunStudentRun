@@ -22,7 +22,7 @@ void IButton::update()
 			{
 				//unpressed
 				handleButtonEvent(Event::UNPRESSED);
-				setState(State::ACTIVE);
+				//setState(State::ACTIVE);
 				setActionState(ActionState::HOVERED);
 			}
 		}

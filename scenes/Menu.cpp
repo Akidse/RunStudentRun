@@ -1,32 +1,41 @@
 #include "Menu.hpp"
-void MenuScene::handleStartButtonEvents(int event)
+
+void MenuScene::handleLevelButton(std::string objectID, int event)
+{
+	if(objectID == "testLevelButton")std::cout << "UNPRESSED" << std::endl;
+}
+void MenuScene::handleStartButtonEvents(std::string objectID, int event)
 {
 	if (event == Button::Event::UNPRESSED)
 	{
 		startButton->setActive();
+		levelButtonsLayer.setActive(true);
+		settingsButton->setInActive();
+		settingsLayer.setActive(false);
 	}
 }
 
-void MenuScene::handleSettingsButtonEvents(int event)
+void MenuScene::handleSettingsButtonEvents(std::string objectID, int event)
 {
 	if (event == Button::Event::UNPRESSED)
 	{
 		startButton->setInActive();
+		levelButtonsLayer.setActive(false);
 		settingsButton->setActive();
 		settingsLayer.setActive(true);
 	}
 }
 
-void MenuScene::handleAboutButtonEvents(int event)
+void MenuScene::handleAboutButtonEvents(std::string objectID, int event)
 {
 }
 
-void MenuScene::handleExitButtonEvents(int event)
+void MenuScene::handleExitButtonEvents(std::string objectID, int event)
 {
 	SceneManager::getInstance()->getWindow()->close();
 }
 
-void MenuScene::handleMusicSwitcherEvents(int event)
+void MenuScene::handleMusicSwitcherEvents(std::string objectID, int event)
 {
 	if (event == GuiSwitcher::Event::DECREASE_VALUE || event == GuiSwitcher::Event::INCREASE_VALUE)
 	{
@@ -35,7 +44,7 @@ void MenuScene::handleMusicSwitcherEvents(int event)
 	}	
 }
 
-void MenuScene::handleSoundSwitcherEvents(int event)
+void MenuScene::handleSoundSwitcherEvents(std::string objectID, int event)
 {
 	if (event == GuiSwitcher::Event::DECREASE_VALUE || event == GuiSwitcher::Event::INCREASE_VALUE)
 	{
@@ -44,7 +53,7 @@ void MenuScene::handleSoundSwitcherEvents(int event)
 	}
 }
 
-void MenuScene::handleLangButtonEnEvents(int event)
+void MenuScene::handleLangButtonEnEvents(std::string objectID, int event)
 {
 	if (configManager->get("locale") != "en")
 	{
@@ -57,7 +66,7 @@ void MenuScene::handleLangButtonEnEvents(int event)
 		isReadyForRefresh = true;
 	}
 }
-void MenuScene::handleLangButtonUkEvents(int event)
+void MenuScene::handleLangButtonUkEvents(std::string objectID, int event)
 {
 	if (configManager->get("locale") != "uk")
 	{
@@ -70,7 +79,7 @@ void MenuScene::handleLangButtonUkEvents(int event)
 		isReadyForRefresh = true;
 	}
 }
-void MenuScene::handleLangButtonRuEvents(int event)
+void MenuScene::handleLangButtonRuEvents(std::string objectID, int event)
 {
 	if (configManager->get("locale") != "ru")
 	{
@@ -129,12 +138,31 @@ void MenuScene::generateMenuLayer()
 
 void MenuScene::generateLevelsLayer()
 {
+	levelButtonsLayer.setPosition(600, 200);
 
+	INIFileParser parser("userdata/levels.dat");
+	std::map<std::string, std::string> levelsData = parser.parse();
+	bool isNotCompleted = false;
+	for (int i = 0; i < 7; i++)
+	{
+		std::cout << (i - i / 3 * 3) << std::endl;
+		
+		levelButtons[i] = new LevelButton(sf::Vector2f(670.f + 150 * (i - i/3*3), 150.f + 150*(i/3)), *ResourcesManager::getInstance()->menuFont);
+		levelButtons[i]->setLevelStats(i+1, std::stoi(levelsData.at(std::to_string(i+1))), 10);
+		levelButtons[i]->setID("levelButton" + std::to_string(i));
+		levelButtons[i]->registerEventHandler<MenuScene>(LevelButton::Event::UNPRESSED, this, &MenuScene::handleLevelButton);
+
+		if (isNotCompleted)levelButtons[i]->setState(IButton::State::DISABLED);
+		if (std::stoi(levelsData.at(std::to_string(i + 1))) == 0)isNotCompleted = true;
+		levelButtonsLayer.addEntity(*levelButtons[i]);
+	}
+
+	levelButtonsLayer.setActive(false);
 }
 
 void MenuScene::generateSettingsLayer()
 {
-	soundSwitcher= new GuiSwitcher(*ResourcesManager::getInstance()->menuLeftArrowTexture, *ResourcesManager::getInstance()->menuRightArrowTexture, *ResourcesManager::getInstance()->menuFont, sf::Vector2f(900, 257)),
+	soundSwitcher = new GuiSwitcher(*ResourcesManager::getInstance()->menuLeftArrowTexture, *ResourcesManager::getInstance()->menuRightArrowTexture, *ResourcesManager::getInstance()->menuFont, sf::Vector2f(900, 257)),
 	musicSwitcher = new GuiSwitcher(*ResourcesManager::getInstance()->menuLeftArrowTexture, *ResourcesManager::getInstance()->menuRightArrowTexture, *ResourcesManager::getInstance()->menuFont, sf::Vector2f(900, 317)),
 	settingsLayer.setPosition(600, 200);
 	langSwitcherLayer.setPosition(700, 150);
@@ -185,16 +213,10 @@ void MenuScene::generateSettingsLayer()
 	settingsLayer.addEntity(*soundSwitcher);
 
 	settingsLayer.setActive(false);
-
-	testLevelButton = new LevelButton(sf::Vector2f(670.f, 150.f), *ResourcesManager::getInstance()->menuFont);
 }
 
 void MenuScene::handleInput()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-	{
-		SceneManager::getInstance()->setScene(SceneType::INTRO);
-	}
 }
 
 void MenuScene::update()
@@ -212,6 +234,10 @@ void MenuScene::update()
 		langButtonRu->update();
 		langButtonUk->update();
 	}
+	if (levelButtonsLayer.isActive())
+	{
+		for (int i = 0; i < 7; i++)levelButtons[i]->update();
+	}
 	if (isReadyForRefresh)SceneManager::getInstance()->setScene(SceneType::INTRO);
 }
 
@@ -221,7 +247,7 @@ void MenuScene::draw(sf::RenderWindow *window)
 	window->draw(menuBackgroundSprite);
 	window->draw(menuLayer);
 	window->draw(settingsLayer);
-	window->draw(*testLevelButton);
+	window->draw(levelButtonsLayer);
 }
 
 MenuScene::~MenuScene()
