@@ -9,7 +9,7 @@ class LoadingScene : public Scene
 {
 	sf::CircleShape circle;
 public:
-	void loadResourses();
+	LoadingScene();
 	void draw(sf::RenderWindow *window);
 	void update();
 	void handleInput();

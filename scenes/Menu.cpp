@@ -2,7 +2,9 @@
 
 void MenuScene::handleLevelButton(std::string objectID, int event)
 {
-	if(objectID == "testLevelButton")std::cout << "UNPRESSED" << std::endl;
+	ConfigManager::getInstance()->setCurrentGameLevel(std::stoi(objectID.erase(0, 11))+1);
+	//std::cout << objectID.erase(0, 11) << std::endl;
+	isReadyForGameScreen = true;
 }
 void MenuScene::handleStartButtonEvents(std::string objectID, int event)
 {
@@ -12,6 +14,7 @@ void MenuScene::handleStartButtonEvents(std::string objectID, int event)
 		levelButtonsLayer.setActive(true);
 		settingsButton->setInActive();
 		settingsLayer.setActive(false);
+		aboutLayer.setActive(false);
 	}
 }
 
@@ -23,11 +26,21 @@ void MenuScene::handleSettingsButtonEvents(std::string objectID, int event)
 		levelButtonsLayer.setActive(false);
 		settingsButton->setActive();
 		settingsLayer.setActive(true);
+		aboutLayer.setActive(false);
 	}
 }
 
 void MenuScene::handleAboutButtonEvents(std::string objectID, int event)
 {
+	if (event == Button::Event::UNPRESSED)
+	{
+		startButton->setInActive();
+		settingsButton->setInActive();
+		levelButtonsLayer.setActive(false);
+		aboutButton->setActive();
+		aboutLayer.setActive(true);
+		settingsLayer.setActive(false);
+	}
 }
 
 void MenuScene::handleExitButtonEvents(std::string objectID, int event)
@@ -108,6 +121,13 @@ MenuScene::MenuScene()
 	generateMenuLayer();
 	generateLevelsLayer();
 	generateSettingsLayer();
+	generateAboutLayer();
+
+	if (ConfigManager::getInstance()->openLevelLayer == true)
+	{
+		handleStartButtonEvents("null", Button::Event::UNPRESSED);
+		ConfigManager::getInstance()->openLevelLayer = false;
+	}
 }
 
 void MenuScene::generateMenuLayer()
@@ -115,19 +135,19 @@ void MenuScene::generateMenuLayer()
 	menuLayer.setPosition(130, 260);
 
 	startButton = new Button(*resourcesManager->menuButtonTexture, sf::Vector2f(400, 80), sf::Vector2f(130, 260));
-	startButton->setText(i18nManager->getText("Play"), *resourcesManager->menuFont, 30, sf::Color::White);
+	startButton->setText(i18nManager->getText("Play"), *resourcesManager->menuFont, 40, sf::Color::White);
 	startButton->registerEventHandler<MenuScene>(Button::Event::UNPRESSED, this, &MenuScene::handleStartButtonEvents);
 
 	settingsButton = new Button(*resourcesManager->menuButtonTexture, sf::Vector2f(400, 80), sf::Vector2f(130, 360));
-	settingsButton->setText(i18nManager->getText("Settings"), *resourcesManager->menuFont, 30, sf::Color::White);
+	settingsButton->setText(i18nManager->getText("Settings"), *resourcesManager->menuFont, 40, sf::Color::White);
 	settingsButton->registerEventHandler<MenuScene>(Button::Event::UNPRESSED, this, &MenuScene::handleSettingsButtonEvents);
 
 	aboutButton = new Button(*resourcesManager->menuButtonTexture, sf::Vector2f(400, 80), sf::Vector2f(130, 460));
-	aboutButton->setText(i18nManager->getText("About"), *resourcesManager->menuFont, 30, sf::Color::White);
+	aboutButton->setText(i18nManager->getText("About"), *resourcesManager->menuFont, 40, sf::Color::White);
 	aboutButton->registerEventHandler<MenuScene>(Button::Event::UNPRESSED, this, &MenuScene::handleAboutButtonEvents);
 
 	exitButton = new Button(*resourcesManager->menuButtonTexture, sf::Vector2f(400, 80), sf::Vector2f(130, 560));
-	exitButton->setText(i18nManager->getText("Exit"), *resourcesManager->menuFont, 30, sf::Color::White);
+	exitButton->setText(i18nManager->getText("Exit"), *resourcesManager->menuFont, 40, sf::Color::White);
 	exitButton->registerEventHandler<MenuScene>(Button::Event::UNPRESSED, this, &MenuScene::handleExitButtonEvents);
 
 	menuLayer.addEntity(*startButton);
@@ -145,8 +165,6 @@ void MenuScene::generateLevelsLayer()
 	bool isNotCompleted = false;
 	for (int i = 0; i < 7; i++)
 	{
-		std::cout << (i - i / 3 * 3) << std::endl;
-		
 		levelButtons[i] = new LevelButton(sf::Vector2f(670.f + 150 * (i - i/3*3), 150.f + 150*(i/3)), *ResourcesManager::getInstance()->menuFont);
 		levelButtons[i]->setLevelStats(i+1, std::stoi(levelsData.at(std::to_string(i+1))), 10);
 		levelButtons[i]->setID("levelButton" + std::to_string(i));
@@ -215,6 +233,25 @@ void MenuScene::generateSettingsLayer()
 	settingsLayer.setActive(false);
 }
 
+void MenuScene::generateAboutLayer()
+{
+	aboutSprite.setTexture(resourcesManager->menuAboutTexture);
+	aboutSprite.setPosition(750, 350);
+	aboutSprite.setSize(sf::Vector2f(181, 346));
+
+	aboutText.setString(i18nManager->getText("Its Me Pavlo") + "\n" + i18nManager->getText("and this dog stole") + "\n" + i18nManager->getText("my homework.") + "\n" + i18nManager->getText("Will you help me")
+		+ "\n" + i18nManager->getText("find all pages?"));
+	aboutText.setFillColor(sf::Color::Black);
+	aboutText.setFont(*resourcesManager->menuFont);
+	aboutText.setPosition(680, 120);
+	aboutText.setCharacterSize(30);
+
+	aboutLayer.addEntity(aboutText);
+	aboutLayer.addEntity(aboutSprite);
+
+	aboutLayer.setActive(true);
+}
+
 void MenuScene::handleInput()
 {
 }
@@ -238,7 +275,14 @@ void MenuScene::update()
 	{
 		for (int i = 0; i < 7; i++)levelButtons[i]->update();
 	}
-	if (isReadyForRefresh)SceneManager::getInstance()->setScene(SceneType::INTRO);
+	if (levelButtonsLayer.isActive() && isReadyForGameScreen == true)
+	{
+		SceneManager::getInstance()->setScene(SceneType::GAME);
+	}
+	if (settingsLayer.isActive() && isReadyForRefresh == true)
+	{
+		SceneManager::getInstance()->setScene(SceneType::INTRO);
+	}
 }
 
 void MenuScene::draw(sf::RenderWindow *window)
@@ -248,6 +292,7 @@ void MenuScene::draw(sf::RenderWindow *window)
 	window->draw(menuLayer);
 	window->draw(settingsLayer);
 	window->draw(levelButtonsLayer);
+	window->draw(aboutLayer);
 }
 
 MenuScene::~MenuScene()

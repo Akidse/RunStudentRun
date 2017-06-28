@@ -41,3 +41,13 @@ void ConfigManager::rewriteConfig()
 	}
 	file.close();
 }
+
+int ConfigManager::getCurrentGameLevel()
+{
+	return currentGameLevel;
+}
+
+void ConfigManager::setCurrentGameLevel(int levelNumber)
+{
+	currentGameLevel = levelNumber;
+}

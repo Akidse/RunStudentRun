@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Файлы исходного кода">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Заголовочные файлы">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="managers">
+      <UniqueIdentifier>{acb4be02-7e15-462e-95b3-321dc7045d8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scenes">
+      <UniqueIdentifier>{25118ba2-5fae-407d-8566-f13136491141}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine">
+      <UniqueIdentifier>{092bd592-745b-47ba-b32a-5efa789db62c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utilities">
+      <UniqueIdentifier>{90b7bcf6-3b34-4a6e-8cd4-dd1a86410a07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders">
+      <UniqueIdentifier>{340e190d-c84a-4ed5-b1a4-19ea53e7480e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="entities">
+      <UniqueIdentifier>{6feb01f3-29c4-43c9-87a6-40d8f5a114ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="locale">
+      <UniqueIdentifier>{9fadbbe6-04e5-484b-b870-b328273b4aea}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\Intro.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\Menu.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="managers\SceneManager.cpp">
+      <Filter>managers</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMEngine\Engine.cpp">
+      <Filter>engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMEngine\Scene.cpp">
+      <Filter>engine</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities\Constants.cpp">
+      <Filter>utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="managers\ResourcesManager.cpp">
+      <Filter>managers</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\Loading.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="managers\TimeManager.cpp">
+      <Filter>managers</Filter>
+    </ClCompile>
+    <ClCompile Include="managers\SettingsManager.cpp">
+      <Filter>managers</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\Button.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMEngine\Eventable.cpp">
+      <Filter>engine</Filter>
+    </ClCompile>
+    <ClCompile Include="managers\i18nManager.cpp">
+      <Filter>managers</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities\INIFileParser.cpp">
+      <Filter>utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\GuiLayer.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\GuiSwitcher.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="managers\ConfigManager.cpp">
+      <Filter>managers</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\IButton.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\LevelButton.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\Game.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\Level.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\LevelBlock.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\Student.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities\LevelParser.cpp">
+      <Filter>utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities\Interpolate.cpp">
+      <Filter>utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\LevelBlockFactory.cpp">
+      <Filter>entities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="scenes\Intro.hpp">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\Menu.hpp">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="managers\SceneManager.hpp">
+      <Filter>managers</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMEngine\Scene.hpp">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\Constants.hpp">
+      <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="managers\ResourcesManager.hpp">
+      <Filter>managers</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\Loading.hpp">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMEngine\SceneType.hpp">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMEngine\Engine.hpp">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="managers\TimeManager.hpp">
+      <Filter>managers</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMEngine\TimeType.hpp">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="managers\SettingsManager.hpp">
+      <Filter>managers</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\Button.hpp">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMEngine\Eventable.hpp">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="managers\i18nManager.hpp">
+      <Filter>managers</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\INIFileParser.hpp">
+      <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\GuiLayer.hpp">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\GuiSwitcher.hpp">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="managers\ConfigManager.hpp">
+      <Filter>managers</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\IButton.hpp">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\LevelButton.hpp">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\Game.hpp">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\Level.hpp">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\LevelBlock.hpp">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\Student.hpp">
+      <Filter>entities</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\LevelParser.hpp">
+      <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities\Interpolate.hpp">
+      <Filter>utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\LevelBlockFactory.hpp">
+      <Filter>entities</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\shaders\logoShader.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\locale\en.locale">
+      <Filter>locale</Filter>
+    </None>
+    <None Include="resources\locale\ru.locale">
+      <Filter>locale</Filter>
+    </None>
+    <None Include="resources\locale\uk.locale">
+      <Filter>locale</Filter>
+    </None>
+  </ItemGroup>
+</Project>

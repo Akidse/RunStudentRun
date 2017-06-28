@@ -22,6 +22,7 @@ class MenuScene : public Scene
 	GuiLayer settingsLayer;
 	GuiLayer langSwitcherLayer;
 	GuiLayer levelButtonsLayer;
+	GuiLayer aboutLayer;
 	Button* startButton;
 	Button* settingsButton;
 	Button* aboutButton;
@@ -38,12 +39,17 @@ class MenuScene : public Scene
 	sf::Text langSwitcherLabel;
 	sf::Text soundSwitcherLabel;
 	sf::Text musicSwitcherLabel;
+	sf::Text aboutText;
+
+	sf::RectangleShape aboutSprite;
 
 	sf::View* view;
 
 	bool isReadyForRefresh = false;
+	bool isReadyForGameScreen = false;
 	void generateMenuLayer();
 	void generateSettingsLayer();
+	void generateAboutLayer();
 	void generateLevelsLayer();
 public:
 

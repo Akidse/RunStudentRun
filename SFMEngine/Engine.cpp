@@ -16,7 +16,7 @@ Engine::Engine()
 	ResourcesManager::getInstance()->setGlobalMusicVolume(10*std::stoi(ConfigManager::getInstance()->get("music")));
 	ResourcesManager::getInstance()->setGlobalSoundVolume(10*std::stoi(ConfigManager::getInstance()->get("sound")));
 	SceneManager::getInstance()->init(&window);
-	SceneManager::getInstance()->setScene(SceneType::MENU);
+	SceneManager::getInstance()->setScene(SceneType::INTRO);
 	TimeManager::getInstance()->init();
 }
 
@@ -26,15 +26,19 @@ void Engine::start()
 }
 void Engine::loop()
 {
-	while (true)
+	sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
+	sf::Clock clock;
+	sf::Time timeSinceLastUpdate = sf::Time::Zero;
+	while (window.isOpen())
 	{
 		TimeManager::getInstance()->updateLoopData();
-
-		while (TimeManager::getInstance()->getTime(TimeType::LAG_TIME) >= 1000 / Constants::FRAMERATE)
+		timeSinceLastUpdate += clock.restart();
+		while (timeSinceLastUpdate > TimePerFrame)
 		{
+			timeSinceLastUpdate -= TimePerFrame;
 			this->handleInput();
 			SceneManager::getInstance()->getCurrentScene()->update();
-			TimeManager::getInstance()->setTime(TimeManager::getInstance()->getTime(TimeType::LAG_TIME) - 1000 / Constants::FRAMERATE, TimeType::LAG_TIME);
+			//TimeManager::getInstance()->setTime(TimeManager::getInstance()->getTime(TimeType::LAG_TIME) - TimePerFrame, TimeType::LAG_TIME);
 		}
 
 		this->window.clear(sf::Color(255,255,255));

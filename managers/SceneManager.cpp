@@ -37,6 +37,12 @@ void SceneManager::createScene(SceneType p_scene)
 	case SceneType::MENU:
 		currentScene = new MenuScene();
 		break;
+	case SceneType::GAME:
+		currentScene = new GameScene();
+		break;
+	case SceneType::LOADING:
+		currentScene = new LoadingScene();
+		break;
 	}
 }
 

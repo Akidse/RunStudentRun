@@ -1,0 +1,39 @@
+﻿Сборка начата 25.06.2017 4:23:41.
+     1>Проект "C:\Users\akidse\documents\visual studio 2013\Projects\SFML template1\SFML template1\SFML template1.vcxproj" в узле 2 (целевые объекты Build).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"A:\development\SFML-2.4.1\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D SFML_DYNAMIC /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt SFMEngine\Engine.cpp
+         Engine.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\akidse\documents\visual studio 2013\Projects\SFML template1\Debug\SFML template1.exe" /INCREMENTAL /NOLOGO /LIBPATH:"A:\development\SFML-2.4.1\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" "sfml-audio-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\akidse\documents\visual studio 2013\Projects\SFML template1\Debug\SFML template1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\akidse\documents\visual studio 2013\Projects\SFML template1\Debug\SFML template1.lib" /MACHINE:X86 Debug\Button.obj
+         Debug\GuiLayer.obj
+         Debug\GuiSwitcher.obj
+         Debug\IButton.obj
+         Debug\Level.obj
+         Debug\LevelBlock.obj
+         Debug\LevelButton.obj
+         Debug\LevelBlockFactory.obj
+         Debug\Student.obj
+         Debug\main.obj
+         Debug\ConfigManager.obj
+         Debug\i18nManager.obj
+         Debug\ResourcesManager.obj
+         Debug\SceneManager.obj
+         Debug\SettingsManager.obj
+         Debug\TimeManager.obj
+         Debug\Game.obj
+         Debug\Intro.obj
+         Debug\Loading.obj
+         Debug\Menu.obj
+         Debug\Engine.obj
+         Debug\Eventable.obj
+         Debug\Scene.obj
+         Debug\Constants.obj
+         Debug\INIFileParser.obj
+         Debug\Interpolate.obj
+         Debug\LevelParser.obj
+         SFML template1.vcxproj -> C:\Users\akidse\documents\visual studio 2013\Projects\SFML template1\Debug\SFML template1.exe
+     1>Сборка проекта "C:\Users\akidse\documents\visual studio 2013\Projects\SFML template1\SFML template1\SFML template1.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+Затраченное время: 00:00:01.16

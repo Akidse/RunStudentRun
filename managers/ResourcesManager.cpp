@@ -32,6 +32,11 @@ void ResourcesManager::chooseSceneAction(SceneType p_scene, Action p_action)
 		if (p_action == Action::UNLOAD_RESOURCES)unloadMenuResources();
 		if (p_action == Action::SOUND_VOLUME)volumeMenuSound();
 		if (p_action == Action::MUSIC_VOLUME)volumeMenuMusic();
+	case SceneType::GAME:
+		if (p_action == Action::LOAD_RESOURCES)loadGameResources();
+		if (p_action == Action::UNLOAD_RESOURCES)unloadGameResources();
+		if (p_action == Action::SOUND_VOLUME)volumeGameSound();
+		if (p_action == Action::MUSIC_VOLUME)volumeGameMusic();
 		break;
 	}
 }
@@ -120,12 +125,16 @@ void ResourcesManager::loadMenuResources()
 	menuLangButtonRuTexture->loadFromFile("resources/gfx/langbutton_ru.png");
 	menuLangButtonRuTexture->setSmooth(false);
 
+	menuAboutTexture = new sf::Texture();
+	menuAboutTexture->loadFromFile("resources/gfx/student_dog.png");
+	menuAboutTexture->setSmooth(false);
+
 	menuMusic = new sf::Music();
 	menuMusic->openFromFile("resources/music/menu_stressedout.ogg");
 	menuMusic->setVolume(globalMusicVolume);
 
 	menuFont = new sf::Font();
-	menuFont->loadFromFile("resources/fonts/menu.ttf");
+	menuFont->loadFromFile("resources/fonts/pixel_font3.ttf");
 }
 void ResourcesManager::unloadMenuResources()
 {
@@ -140,6 +149,80 @@ void ResourcesManager::unloadMenuResources()
 
 void ResourcesManager::loadLoadingResources(){}
 
+void ResourcesManager::loadGameResources()
+{
+	gameBackgroundTop = new sf::Texture();
+	gameBackgroundTop->loadFromFile("resources/gfx/1_top.png");
+	gameBackgroundTop->setSmooth(false);
+
+	gameBlock1 = new sf::Texture();
+	gameBlock1->loadFromFile("resources/gfx/block_5.png");
+	gameBlock1->setSmooth(false);
+
+	gameBlock1_top = new sf::Texture();
+	gameBlock1_top->loadFromFile("resources/gfx/block_6_top.png");
+	gameBlock1_top->setSmooth(false);
+
+	gameBlock1_bottom = new sf::Texture();
+	gameBlock1_bottom->loadFromFile("resources/gfx/block_6_bottom.png");
+	gameBlock1_bottom->setSmooth(false);
+
+	gameBlock2 = new sf::Texture();
+	gameBlock2->loadFromFile("resources/gfx/block_4.png");
+	gameBlock2->setSmooth(false);
+
+	gameStudentRunningSprite = new sf::Texture();
+	gameStudentRunningSprite->loadFromFile("resources/gfx/student_run.png");
+	gameStudentRunningSprite->setSmooth(false);
+
+	gameMusic = new sf::Music();
+	gameMusic->openFromFile("resources/music/game_lane.ogg");
+	gameMusic->setVolume(globalMusicVolume);
+
+	gameSoundLoseBuffer = new sf::SoundBuffer;
+	gameSoundLoseBuffer->loadFromFile("resources/music/game_lose.ogg");
+
+	gameSoundWinBuffer = new sf::SoundBuffer;
+	gameSoundWinBuffer->loadFromFile("resources/music/game_win.ogg");
+
+	gameSoundCollectBuffer = new sf::SoundBuffer;
+	gameSoundCollectBuffer->loadFromFile("resources/music/game_collect.ogg");
+
+	gameLose = new sf::Sound();
+	gameLose->setBuffer(*gameSoundLoseBuffer);
+	gameLose->setVolume(globalSoundVolume);
+
+	gameWin = new sf::Sound();
+	gameWin->setBuffer(*gameSoundWinBuffer);
+	gameWin->setVolume(globalSoundVolume);
+
+	gameCollect = new sf::Sound;
+	gameCollect->setBuffer(*gameSoundCollectBuffer);
+	gameCollect->setVolume(globalSoundVolume);
+
+	gameFont = new sf::Font();
+	gameFont->loadFromFile("resources/fonts/pixel_font3.ttf");
+}
+void ResourcesManager::unloadGameResources()
+{
+	delete gameBackgroundTop;
+	delete gameBlock1;
+	delete gameBlock1_top;
+	delete gameBlock1_bottom;
+	delete gameBlock2;
+	delete gameStudentRunningSprite;
+	delete gameFont;
+	delete gameLose;
+	delete gameWin;
+	delete gameCollect;
+	delete gameMusic;
+	delete gameSoundCollectBuffer;
+	delete gameSoundLoseBuffer;
+	delete gameSoundWinBuffer;
+}
+
+void ResourcesManager::volumeGameSound(){}
+void ResourcesManager::volumeGameMusic(){}
 
 void ResourcesManager::volumeIntroSound(){}
 void ResourcesManager::volumeIntroMusic(){}
@@ -149,3 +232,4 @@ void ResourcesManager::volumeMenuMusic()
 {
 	menuMusic->setVolume(globalMusicVolume);
 }
+

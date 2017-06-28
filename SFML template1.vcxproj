@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{4D87EF09-58BA-4486-81C9-E8228E7DD847}</ProjectGuid>
+    <RootNamespace>SFML_template1</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>A:\development\SFML-2.4.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_DYNAMIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>A:\development\SFML-2.4.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="entities\Button.cpp" />
+    <ClCompile Include="entities\GuiLayer.cpp" />
+    <ClCompile Include="entities\GuiSwitcher.cpp" />
+    <ClCompile Include="entities\IButton.cpp" />
+    <ClCompile Include="entities\Level.cpp" />
+    <ClCompile Include="entities\LevelBlock.cpp" />
+    <ClCompile Include="entities\LevelButton.cpp" />
+    <ClCompile Include="entities\LevelBlockFactory.cpp" />
+    <ClCompile Include="entities\Student.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="managers\ConfigManager.cpp" />
+    <ClCompile Include="managers\i18nManager.cpp" />
+    <ClCompile Include="managers\ResourcesManager.cpp" />
+    <ClCompile Include="managers\SceneManager.cpp" />
+    <ClCompile Include="managers\SettingsManager.cpp" />
+    <ClCompile Include="managers\TimeManager.cpp" />
+    <ClCompile Include="scenes\Game.cpp" />
+    <ClCompile Include="scenes\Intro.cpp" />
+    <ClCompile Include="scenes\Loading.cpp" />
+    <ClCompile Include="scenes\Menu.cpp" />
+    <ClCompile Include="SFMEngine\Engine.cpp" />
+    <ClCompile Include="SFMEngine\Eventable.cpp" />
+    <ClCompile Include="SFMEngine\Scene.cpp" />
+    <ClCompile Include="utilities\Constants.cpp" />
+    <ClCompile Include="utilities\INIFileParser.cpp" />
+    <ClCompile Include="utilities\Interpolate.cpp" />
+    <ClCompile Include="utilities\LevelParser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="entities\Button.hpp" />
+    <ClInclude Include="entities\GuiLayer.hpp" />
+    <ClInclude Include="entities\GuiSwitcher.hpp" />
+    <ClInclude Include="entities\IButton.hpp" />
+    <ClInclude Include="entities\Level.hpp" />
+    <ClInclude Include="entities\LevelBlock.hpp" />
+    <ClInclude Include="entities\LevelButton.hpp" />
+    <ClInclude Include="entities\LevelBlockFactory.hpp" />
+    <ClInclude Include="entities\Student.hpp" />
+    <ClInclude Include="managers\ConfigManager.hpp" />
+    <ClInclude Include="managers\i18nManager.hpp" />
+    <ClInclude Include="managers\ResourcesManager.hpp" />
+    <ClInclude Include="managers\SceneManager.hpp" />
+    <ClInclude Include="managers\SettingsManager.hpp" />
+    <ClInclude Include="managers\TimeManager.hpp" />
+    <ClInclude Include="scenes\Game.hpp" />
+    <ClInclude Include="scenes\Intro.hpp" />
+    <ClInclude Include="scenes\Loading.hpp" />
+    <ClInclude Include="scenes\Menu.hpp" />
+    <ClInclude Include="SFMEngine\Engine.hpp" />
+    <ClInclude Include="SFMEngine\Eventable.hpp" />
+    <ClInclude Include="SFMEngine\Scene.hpp" />
+    <ClInclude Include="SFMEngine\SceneType.hpp" />
+    <ClInclude Include="SFMEngine\TimeType.hpp" />
+    <ClInclude Include="utilities\Constants.hpp" />
+    <ClInclude Include="utilities\INIFileParser.hpp" />
+    <ClInclude Include="utilities\Interpolate.hpp" />
+    <ClInclude Include="utilities\LevelParser.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\locale\en.locale" />
+    <None Include="resources\locale\ru.locale" />
+    <None Include="resources\locale\uk.locale" />
+    <None Include="resources\shaders\logoShader.frag" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -7,6 +7,8 @@
 #include "../SFMEngine/SceneType.hpp"
 #include "../scenes/Intro.hpp"
 #include "../scenes/Menu.hpp"
+#include "../scenes/Game.hpp"
+#include "../scenes/Loading.hpp"
 class SceneManager
 {
 private:

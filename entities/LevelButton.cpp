@@ -16,7 +16,7 @@ LevelButton::LevelButton(sf::Vector2f pPosition, sf::Font& pFont)
 	mLevelText.setCharacterSize(80);
 
 	mCollectionText.setFont(mFont);
-	mCollectionText.setCharacterSize(25);
+	mCollectionText.setCharacterSize(30);
 
 	normalEffect();
 
@@ -37,6 +37,7 @@ void LevelButton::setLevelStats(int pLevelNumber, int pLevelCollectedNumber, int
 	mCollectionText.setString(std::to_string(mLevelCollectedNumber) + '/' + std::to_string(mLevelFullCollectionNumber));
 
 	updateText();
+	normalEffect();
 }
 
 void LevelButton::updateText()

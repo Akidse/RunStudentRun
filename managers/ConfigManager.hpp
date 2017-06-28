@@ -12,6 +12,10 @@ private:
 	ConfigManager(const ConfigManager&);
 	ConfigManager& operator = (ConfigManager&);
 public:
+	int currentGameLevel = 1;
+	bool openLevelLayer = false;
+	int getCurrentGameLevel();
+	void setCurrentGameLevel(int levelNumber);
 	static ConfigManager* getInstance();
 	void init();
 	std::string get(std::string p_config);
